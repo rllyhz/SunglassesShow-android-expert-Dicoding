@@ -14,15 +14,17 @@ class FavoritesViewModel(
     val favMovies = useCase?.getFavMovies()
     val favTVShows = useCase?.getFavTVShows()
 
-    fun deleteFavMovie(favMovie: FavMovie) {
+    fun deleteFavMovie(favMovie: FavMovie?) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCase?.deleteFavMovie(favMovie)
+            if (favMovie != null)
+                useCase?.deleteFavMovie(favMovie)
         }
     }
 
-    fun deleteFavTVShow(favTVShow: FavTVShow) {
+    fun deleteFavTVShow(favTVShow: FavTVShow?) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCase?.deleteFavTVShow(favTVShow)
+            if (favTVShow != null)
+                useCase?.deleteFavTVShow(favTVShow)
         }
     }
 }

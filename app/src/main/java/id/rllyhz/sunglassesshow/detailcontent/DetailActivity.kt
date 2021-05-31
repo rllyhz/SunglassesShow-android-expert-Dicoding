@@ -100,6 +100,12 @@ class DetailActivity : AppCompatActivity() {
         finish()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        currentMovie = null
+        currentTvShow = null
+    }
+
     companion object {
         const val EXTRA_CONTENT_MOVIE = "EXTRA_CONTENT_MOVIE"
         const val EXTRA_CONTENT_TV_SHOW = "EXTRA_CONTENT_TV_SHOW"

@@ -24,7 +24,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var tvShowsAdapter: TVShowsAdapter
+    private var tvShowsAdapter: TVShowsAdapter? = null
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
@@ -45,7 +45,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
 
     private fun setInitialUI() {
         tvShowsAdapter = TVShowsAdapter()
-        tvShowsAdapter.setItemCallback(this)
+        tvShowsAdapter?.setItemCallback(this)
 
         with(binding) {
 
@@ -97,7 +97,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
 
     private fun setSuccessUI(data: List<TVShow>?) {
         if (data != null && data.isNotEmpty()) {
-            tvShowsAdapter.submitList(data)
+            tvShowsAdapter?.submitList(data)
 
             with(binding) {
                 showView(searchViewTvShows, true)
@@ -182,5 +182,6 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // avoiding memory leaks
+        tvShowsAdapter = null
     }
 }

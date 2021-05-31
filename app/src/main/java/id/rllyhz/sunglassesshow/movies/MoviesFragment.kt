@@ -22,9 +22,9 @@ import kotlinx.coroutines.FlowPreview
 @FlowPreview
 class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
     private var _binding: FragmentMoviesBinding? = null
-    private val binding get() = _binding!! // only valid beetwen onCreateView and onDestroyView
+    private val binding get() = _binding!! // only valid between onCreateView and onDestroyView
 
-    private lateinit var moviesAdapter: MoviesAdapter
+    private var moviesAdapter: MoviesAdapter? = null
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
@@ -45,7 +45,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
 
     private fun setInitialUI() {
         moviesAdapter = MoviesAdapter()
-        moviesAdapter.setItemCallback(this)
+        moviesAdapter?.setItemCallback(this)
 
         with(binding) {
 
@@ -97,7 +97,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
 
     private fun setSuccessUI(data: List<Movie>?) {
         if (data != null && data.isNotEmpty()) {
-            moviesAdapter.submitList(data)
+            moviesAdapter?.submitList(data)
 
             with(binding) {
                 showView(searchViewMovies, true)
@@ -182,5 +182,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // avoiding memory leaks
+        moviesAdapter = null
     }
 }

@@ -28,7 +28,7 @@ class FavMoviesFragment : Fragment(), FavItemCallback<FavMovie> {
     private var _binding: FragmentFavMoviesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var favMoviesAdapter: FavMoviesAdapter
+    private var favMoviesAdapter: FavMoviesAdapter? = null
     private lateinit var viewModel: FavoritesViewModel
 
     private var useCase: SunGlassesShowUseCase? = null
@@ -56,14 +56,14 @@ class FavMoviesFragment : Fragment(), FavItemCallback<FavMovie> {
 
     private fun setInitialUI() {
         favMoviesAdapter = FavMoviesAdapter()
-        favMoviesAdapter.setItemCallback(this)
+        favMoviesAdapter?.setItemCallback(this)
 
         with(binding) {
             val swipedItemCallback = object : SwipeItemCallback(ItemTouchHelper.RIGHT) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val favMovie = favMoviesAdapter.get(viewHolder.bindingAdapterPosition)
+                    val favMovie = favMoviesAdapter?.get(viewHolder.bindingAdapterPosition)
                     viewModel.deleteFavMovie(favMovie)
-                    favMoviesAdapter.currentList?.dataSource?.invalidate()
+                    favMoviesAdapter?.currentList?.dataSource?.invalidate()
                 }
             }
 
@@ -84,7 +84,7 @@ class FavMoviesFragment : Fragment(), FavItemCallback<FavMovie> {
                 if (it.size != 0) {
                     showView(tvFeedback, false)
                     showView(rvFavMovies, true)
-                    favMoviesAdapter.submitList(it)
+                    favMoviesAdapter?.submitList(it)
                     Log.d("Hehe", "setup")
                     Log.d("Hehe", it.toString())
                 } else {
@@ -126,6 +126,7 @@ class FavMoviesFragment : Fragment(), FavItemCallback<FavMovie> {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        favMoviesAdapter = null
     }
 
     companion object {

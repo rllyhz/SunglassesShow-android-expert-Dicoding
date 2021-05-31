@@ -27,7 +27,7 @@ class FavTVShowsFragment : Fragment(), FavItemCallback<FavTVShow> {
     private var _binding: FragmentFavTvShowsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var favTVShowsAdapter: FavTVShowsAdapter
+    private var favTVShowsAdapter: FavTVShowsAdapter? = null
     private lateinit var viewModel: FavoritesViewModel
 
     private var useCase: SunGlassesShowUseCase? = null
@@ -63,14 +63,14 @@ class FavTVShowsFragment : Fragment(), FavItemCallback<FavTVShow> {
 
     private fun setInitialUI() {
         favTVShowsAdapter = FavTVShowsAdapter()
-        favTVShowsAdapter.setItemCallback(this)
+        favTVShowsAdapter?.setItemCallback(this)
 
         with(binding) {
             val swipedItemCallback = object : SwipeItemCallback(ItemTouchHelper.LEFT) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val favTvShow = favTVShowsAdapter.get(viewHolder.bindingAdapterPosition)
+                    val favTvShow = favTVShowsAdapter?.get(viewHolder.bindingAdapterPosition)
                     viewModel.deleteFavTVShow(favTvShow)
-                    favTVShowsAdapter.currentList?.dataSource?.invalidate()
+                    favTVShowsAdapter?.currentList?.dataSource?.invalidate()
                 }
             }
 
@@ -91,7 +91,7 @@ class FavTVShowsFragment : Fragment(), FavItemCallback<FavTVShow> {
                 if (it.size != 0) {
                     showView(tvFeedback, false)
                     showView(rvFavTvShows, true)
-                    favTVShowsAdapter.submitList(it)
+                    favTVShowsAdapter?.submitList(it)
                 } else {
                     showView(tvFeedback, true)
                     showView(rvFavTvShows, false)
@@ -123,6 +123,7 @@ class FavTVShowsFragment : Fragment(), FavItemCallback<FavTVShow> {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        favTVShowsAdapter = null
     }
 
     companion object {

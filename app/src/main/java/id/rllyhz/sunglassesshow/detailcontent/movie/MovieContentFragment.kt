@@ -48,11 +48,11 @@ class MovieContentFragment :
                 if (!toggleBtnFav.isChecked) {
                     // delete
                     viewModel.removeFavMovie(currentMovie)
-                    showToast(getString(R.string.favorites_deleted_tv_show_message))
+                    showToast(getString(R.string.favorites_deleted_movie_message))
                 } else {
                     // add
                     viewModel.addFavMovie(currentMovie)
-                    showToast(getString(R.string.favorites_added_tv_show_message))
+                    showToast(getString(R.string.favorites_added_movie_message))
                 }
             }
         }

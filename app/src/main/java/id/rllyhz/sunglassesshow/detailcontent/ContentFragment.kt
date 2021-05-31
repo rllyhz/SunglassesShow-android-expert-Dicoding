@@ -15,7 +15,7 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
     private var _binding: FragmentContentBinding? = null
     protected val binding get() = _binding!! // only valid between onCreateView and onDestroyView.
 
-    private lateinit var _adapter: ListAdapter<T, VH>
+    private var _adapter: ListAdapter<T, VH>? = null
     protected var isLoading: Boolean = false
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
         if (data == null || data.isEmpty())
             setNoResultsUI(true)
         else {
-            _adapter.submitList(data)
+            _adapter?.submitList(data)
             setNoResultsUI(false)
         }
 
@@ -152,6 +152,7 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // avoiding memory leaks
+        _adapter = null
     }
 
     companion object {
