@@ -28,15 +28,16 @@ class TVShowDetailViewModel @AssistedInject constructor(
     private lateinit var detailTVShow: LiveData<Resource<TVShow>>
     private lateinit var similarTVShows: LiveData<Resource<List<TVShow>>>
     private var isFavoriteTrigger = MutableLiveData(false)
+
     val isFavorite = Transformations.switchMap(isFavoriteTrigger) {
-        useCase.getFavTVShowById(id).asLiveData()
+        useCase.getFavTVShowById(id)
     }
 
     init {
         initAllRequiredData()
     }
 
-    private fun initAllRequiredData() = viewModelScope.launch {
+    fun initAllRequiredData() = viewModelScope.launch {
         detailTVShow = useCase.getTVShowById(id)
         similarTVShows = useCase.getSimilarTVShowsOf(id)
     }

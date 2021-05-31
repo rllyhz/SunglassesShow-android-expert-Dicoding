@@ -29,14 +29,14 @@ class MovieDetailViewModel @AssistedInject constructor(
     private lateinit var similarMovies: LiveData<Resource<List<Movie>>>
     private var isFavoriteTrigger = MutableLiveData(false)
     val isFavorite = Transformations.switchMap(isFavoriteTrigger) {
-        useCase.getFavMovieById(id).asLiveData()
+        useCase.getFavMovieById(id)
     }
 
     init {
         initAllRequiredData()
     }
 
-    private fun initAllRequiredData() = viewModelScope.launch {
+    fun initAllRequiredData() = viewModelScope.launch {
         detailMovie = useCase.getMovieById(id)
         similarMovies = useCase.getSimilarMoviesOf(id)
     }

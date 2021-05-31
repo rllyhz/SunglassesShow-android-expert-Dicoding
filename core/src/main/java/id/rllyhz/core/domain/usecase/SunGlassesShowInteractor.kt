@@ -16,11 +16,11 @@ class SunGlassesShowInteractor(
     private val repository: ISunGlassesShowRepository,
     private val pagedListConfig: PagedList.Config
 ) : SunGlassesShowUseCase {
-    override fun getMovies(): Flow<Resource<List<Movie>>> =
-        repository.getMovies()
+    override fun getMovies(): LiveData<Resource<List<Movie>>> =
+        repository.getMovies().asLiveData()
 
-    override fun getTVShows(): Flow<Resource<List<TVShow>>> =
-        repository.getTVShows()
+    override fun getTVShows(): LiveData<Resource<List<TVShow>>> =
+        repository.getTVShows().asLiveData()
 
     override fun getMovieById(id: Int): LiveData<Resource<Movie>> =
         repository.getMovieById(id).asLiveData()
@@ -46,11 +46,11 @@ class SunGlassesShowInteractor(
     override fun getFavTVShows(): LiveData<PagedList<FavTVShow>> =
         LivePagedListBuilder(repository.getFavTVShows(), pagedListConfig).build()
 
-    override fun getFavMovieById(id: Int): Flow<FavMovie?> =
-        repository.getFavMovieById(id)
+    override fun getFavMovieById(id: Int): LiveData<FavMovie?> =
+        repository.getFavMovieById(id).asLiveData()
 
-    override fun getFavTVShowById(id: Int): Flow<FavTVShow?> =
-        repository.getFavTVShowById(id)
+    override fun getFavTVShowById(id: Int): LiveData<FavTVShow?> =
+        repository.getFavTVShowById(id).asLiveData()
 
     override suspend fun addFavMovie(favMovie: FavMovie): Long =
         repository.addFavMovie(favMovie)

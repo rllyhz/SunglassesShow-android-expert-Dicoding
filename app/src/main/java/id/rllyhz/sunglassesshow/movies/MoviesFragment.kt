@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.rllyhz.core.domain.model.Movie
@@ -102,6 +103,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
             with(binding) {
                 showView(searchViewMovies, true)
                 showView(rvMovies, true)
+                showView(tvSearchingFeedback, false)
                 showView(progressbar, false)
 
                 with(includeLoading.root) {
@@ -118,6 +120,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
         with(binding) {
             showView(searchViewMovies, false)
             showView(rvMovies, false)
+            showView(tvSearchingFeedback, false)
             showView(progressbar, false)
 
             with(includeLoading.root) {
@@ -132,6 +135,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
         with(binding) {
             showView(searchViewMovies, false)
             showView(rvMovies, false)
+            showView(tvSearchingFeedback, false)
             showView(progressbar, false)
 
             with(includeLoading.root) {

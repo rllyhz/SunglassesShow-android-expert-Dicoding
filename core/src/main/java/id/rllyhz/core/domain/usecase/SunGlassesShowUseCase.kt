@@ -10,9 +10,9 @@ import id.rllyhz.core.vo.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface SunGlassesShowUseCase {
-    fun getMovies(): Flow<Resource<List<Movie>>>
+    fun getMovies(): LiveData<Resource<List<Movie>>>
 
-    fun getTVShows(): Flow<Resource<List<TVShow>>>
+    fun getTVShows(): LiveData<Resource<List<TVShow>>>
 
     fun getMovieById(id: Int): LiveData<Resource<Movie>>
 
@@ -30,9 +30,9 @@ interface SunGlassesShowUseCase {
 
     fun getFavTVShows(): LiveData<PagedList<FavTVShow>>
 
-    fun getFavMovieById(id: Int): Flow<FavMovie?>
+    fun getFavMovieById(id: Int): LiveData<FavMovie?>
 
-    fun getFavTVShowById(id: Int): Flow<FavTVShow?>
+    fun getFavTVShowById(id: Int): LiveData<FavTVShow?>
 
     suspend fun addFavMovie(favMovie: FavMovie): Long
 

@@ -102,6 +102,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
             with(binding) {
                 showView(searchViewTvShows, true)
                 showView(rvTvShows, true)
+                showView(tvSearchingFeedback, false)
                 showView(progressbar, false)
 
                 with(includeLoading.root) {
@@ -118,6 +119,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
         with(binding) {
             showView(searchViewTvShows, false)
             showView(rvTvShows, false)
+            showView(tvSearchingFeedback, false)
             showView(progressbar, false)
 
             with(includeLoading.root) {
@@ -132,6 +134,7 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
         with(binding) {
             showView(searchViewTvShows, false)
             showView(rvTvShows, false)
+            showView(tvSearchingFeedback, false)
             showView(progressbar, false)
 
             with(includeLoading.root) {

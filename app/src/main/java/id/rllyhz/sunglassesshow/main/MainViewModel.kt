@@ -18,11 +18,22 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val useCase: SunGlassesShowUseCase
 ) : ViewModel() {
+    private lateinit var _movies: LiveData<Resource<List<Movie>>>
+    val movies: LiveData<Resource<List<Movie>>> get() = _movies
+    private lateinit var _tvShows: LiveData<Resource<List<TVShow>>>
+    val tvShows: LiveData<Resource<List<TVShow>>> get() = _tvShows
 
-    val movies = useCase.getMovies().asLiveData()
-    val tvShows = useCase.getTVShows().asLiveData()
     private val queryForSearchingMovies = MutableLiveData<String>()
     private val queryForSearchingTVShows = MutableLiveData<String>()
+
+    init {
+        initData()
+    }
+
+    fun initData() = viewModelScope.launch {
+        _movies = useCase.getMovies()
+        _tvShows = useCase.getTVShows()
+    }
 
     private val searchingMoviesResults = object : MutableLiveData<Resource<List<Movie>>>() {
         override fun onActive() {
@@ -39,7 +50,7 @@ class MainViewModel @Inject constructor(
                                 value = resultValue
                             }
                         } else {
-                            useCase.getMovies().collect { resultValue ->
+                            useCase.getMovies().asFlow().collect { resultValue ->
                                 value = resultValue
                             }
                         }
@@ -65,7 +76,7 @@ class MainViewModel @Inject constructor(
                                 value = resultValue
                             }
                         } else {
-                            useCase.getTVShows().collect { resultValue ->
+                            useCase.getTVShows().asFlow().collect { resultValue ->
                                 value = resultValue
                             }
                         }
