@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_nav_radius_size">12dp</dimen>
+    <dimen name="item_list_card_height">290dp</dimen>
+    <dimen name="poster_width">136dp</dimen>
+    <dimen name="poster_height">196dp</dimen>
+    <dimen name="search_view_radius_size">8dp</dimen>
+    <dimen name="toggle_btn_fav_icon_size">32dp</dimen>
+</resources>

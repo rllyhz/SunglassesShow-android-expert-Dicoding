@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/moviesFragment">
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="id.rllyhz.sunglassesshow.movies.MoviesFragment"
+        android:label="@string/title_movie" />
+    <fragment
+        android:id="@+id/tvShowsFragment"
+        android:name="id.rllyhz.sunglassesshow.tvshows.TVShowsFragment"
+        android:label="@string/title_tv_show" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="id.rllyhz.favoritecontent.ui.FavoritesFragment"
+        android:label="@string/title_favorites"
+        app:moduleName="SunGlassesShow.favoritecontent" />
+</navigation>

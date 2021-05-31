@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="10dp"
+    shimmer:duration="700"
+    shimmer:shimmer_auto_start="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_poster_bg_detail_loading"
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/iv_poster_bg_detail_loading"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_bg_detail_loading"
+            app:layout_constraintRight_toRightOf="@id/iv_poster_bg_detail_loading"
+            app:layout_constraintTop_toTopOf="@id/iv_poster_bg_detail_loading"
+            app:layout_constraintVertical_bias="0.4">
+
+            <View
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_circle_loading" />
+
+            <View
+                android:layout_width="140dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shape_loading" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/iv_poster_detail_loading"
+            android:layout_width="@dimen/poster_width"
+            android:layout_height="@dimen/poster_height"
+            android:layout_marginStart="12sp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
+
+        <View
+            android:id="@+id/tv_title_detail_loading"
+            android:layout_width="180dp"
+            android:layout_height="18dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_poster_detail_loading" />
+
+        <View
+            android:id="@+id/tv_duration_detail_loading"
+            android:layout_width="120dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_detail_loading" />
+
+        <View
+            android:id="@+id/tv_genres_detail_loading"
+            android:layout_width="160dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_duration_detail_loading" />
+
+        <View
+            android:id="@+id/tv_other_detail_loading"
+            android:layout_width="160dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_genres_detail_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_label_detail_loading"
+            android:layout_width="180dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_poster_detail_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_label_detail_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_2_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_3_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_2_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_4_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_3_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_5_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_4_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_6_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_5_loading" />
+
+        <View
+            android:id="@+id/tv_synopsis_detail_7_loading"
+            android:layout_width="320dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_6_loading" />
+
+        <View
+            android:id="@+id/btn_watch"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis_detail_7_loading" />
+
+        <View
+            android:id="@+id/tv_similar_content_label_detail_loading"
+            android:layout_width="180dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_shape_loading"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_watch" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_list_card_height"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_detail_loading"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_similar_content_label_detail_loading">
+
+            <include
+                layout="@layout/item_movie_and_tv_show_loading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/item_movie_and_tv_show_loading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="240dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
