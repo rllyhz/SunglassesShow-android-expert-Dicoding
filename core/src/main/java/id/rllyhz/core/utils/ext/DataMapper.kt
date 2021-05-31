@@ -2,6 +2,8 @@ package id.rllyhz.core.utils.ext
 
 import id.rllyhz.core.data.local.entity.FavMovie
 import id.rllyhz.core.data.local.entity.FavTVShow
+import id.rllyhz.core.data.local.entity.MovieEntity
+import id.rllyhz.core.data.local.entity.TVShowEntity
 import id.rllyhz.core.data.remote.response.MovieDetailResponse
 import id.rllyhz.core.data.remote.response.MovieResponse
 import id.rllyhz.core.data.remote.response.TVShowDetailResponse
@@ -99,6 +101,35 @@ fun Movie.asFavModel(): FavMovie =
 fun TVShow.asFavModel(): FavTVShow =
     FavTVShow(this.id, posterPath, backdropPath, title, year, rating)
 
+fun Movie.asEntity(): MovieEntity =
+    MovieEntity(
+        id,
+        posterPath,
+        backdropPath,
+        title,
+        genres,
+        durationInMinutes,
+        rate,
+        releasedAt,
+        synopsis,
+        year,
+    )
+
+fun TVShow.asEntity(): TVShowEntity =
+    TVShowEntity(
+        id,
+        posterPath,
+        backdropPath,
+        title,
+        genres,
+        durationInMinutes,
+        rate,
+        releasedAt,
+        synopsis,
+        year,
+    )
+
+
 fun FavMovie.asModel(): Movie =
     Movie(
         this.id,
@@ -131,3 +162,133 @@ fun FavTVShow.asModel(): TVShow =
 
 fun Movie.getDateInString() = DataHelper.getDateInString(releasedAt)
 fun TVShow.getDateInString() = DataHelper.getDateInString(releasedAt)
+
+fun MovieEntity.asModel(): Movie =
+    Movie(
+        id,
+        posterPath,
+        backdropPath,
+        title,
+        genres,
+        durationInMinutes,
+        rate,
+        releasedAt,
+        null,
+        synopsis,
+        null
+    )
+
+fun TVShowEntity.asModel(): TVShow =
+    TVShow(
+        id,
+        posterPath,
+        backdropPath,
+        title,
+        genres,
+        durationInMinutes,
+        rate,
+        releasedAt,
+        null,
+        synopsis,
+        null
+    )
+
+fun List<MovieEntity>.asModel(): List<Movie> {
+    val allMovies = mutableListOf<Movie>()
+
+    for (movie in this) {
+        movie.apply {
+            allMovies.add(
+                Movie(
+                    id,
+                    posterPath,
+                    backdropPath,
+                    title,
+                    genres,
+                    durationInMinutes,
+                    rate,
+                    releasedAt,
+                    null,
+                    synopsis,
+                    null
+                )
+            )
+        }
+    }
+
+    return allMovies
+}
+
+@JvmName("asModelTVShowEntity")
+fun List<TVShowEntity>.asModel(): List<TVShow> {
+    val allTVShows = mutableListOf<TVShow>()
+
+    for (movie in this) {
+        movie.apply {
+            allTVShows.add(
+                TVShow(
+                    id,
+                    posterPath,
+                    backdropPath,
+                    title,
+                    genres,
+                    durationInMinutes,
+                    rate,
+                    releasedAt,
+                    null,
+                    synopsis,
+                    null
+                )
+            )
+        }
+    }
+
+    return allTVShows
+}
+
+fun List<Movie>.asEntity(): List<MovieEntity> {
+    val allMoviesEntity = mutableListOf<MovieEntity>()
+
+    for (movie in this) {
+        allMoviesEntity.add(
+            MovieEntity(
+                movie.id,
+                movie.posterPath,
+                movie.backdropPath,
+                movie.title,
+                movie.genres,
+                movie.durationInMinutes,
+                movie.rate,
+                movie.releasedAt,
+                movie.synopsis,
+                movie.year,
+            )
+        )
+    }
+
+    return allMoviesEntity
+}
+
+@JvmName("asEntityTVShow")
+fun List<TVShow>.asEntity(): List<TVShowEntity> {
+    val allTVShowsEntity = mutableListOf<TVShowEntity>()
+
+    for (tvShow in this) {
+        allTVShowsEntity.add(
+            TVShowEntity(
+                tvShow.id,
+                tvShow.posterPath,
+                tvShow.backdropPath,
+                tvShow.title,
+                tvShow.genres,
+                tvShow.durationInMinutes,
+                tvShow.rate,
+                tvShow.releasedAt,
+                tvShow.synopsis,
+                tvShow.year,
+            )
+        )
+    }
+
+    return allTVShowsEntity
+}

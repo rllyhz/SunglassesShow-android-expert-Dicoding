@@ -2,6 +2,7 @@ package id.rllyhz.core.data.remote
 
 import id.rllyhz.core.api.ApiEndpoint
 import id.rllyhz.core.utils.ext.asModels
+import id.rllyhz.core.vo.ApiResponse
 import id.rllyhz.core.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -12,71 +13,79 @@ class RemoteDataSource @Inject constructor(
     private val api: ApiEndpoint
 ) {
 
-    fun getAllMovies() = flow {
-        emit(Resource.loading(null))
-
+    suspend fun getAllMovies() = flow {
         try {
             val callResults = api.discoverMovies()
             val data = callResults.body()
 
             if (callResults.isSuccessful && data != null) {
-                emit(Resource.success(data.movies.asModels()))
+                if (data.movies.isNotEmpty()) {
+                    emit(ApiResponse.Success(data.movies.asModels()))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
             } else {
-                emit(Resource.error(null, callResults.message()))
+                emit(ApiResponse.Error(callResults.message()))
             }
         } catch (exc: Exception) {
-            emit(Resource.error(null, exc.message ?: "Error occurred!"))
+            emit(ApiResponse.Error(exc.message ?: "Error occurred!"))
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getAllTVShows() = flow {
-        emit(Resource.loading(null))
-
+    suspend fun getAllTVShows() = flow {
         try {
             val callResults = api.discoverTVShows()
             val data = callResults.body()
 
             if (callResults.isSuccessful && data != null) {
-                emit(Resource.success(data.tvShows.asModels()))
+                if (data.tvShows.isNotEmpty()) {
+                    emit(ApiResponse.Success(data.tvShows.asModels()))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
             } else {
-                emit(Resource.error(null, callResults.message()))
+                emit(ApiResponse.Error(callResults.message()))
             }
         } catch (exc: Exception) {
-            emit(Resource.error(null, exc.message ?: "Error occurred!"))
+            emit(ApiResponse.Error(exc.message ?: "Error occurred!"))
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getMovieById(id: Int) = flow {
-        emit(Resource.loading(null))
-
+    suspend fun getMovieById(id: Int) = flow {
         try {
             val callResults = api.getMovieDetailOf(id)
             val data = callResults.body()
 
-            if (callResults.isSuccessful && data != null) {
-                emit(Resource.success(data.asModels()))
+            if (callResults.isSuccessful && callResults.code() == 200) {
+                if (data != null) {
+                    emit(ApiResponse.Success(data.asModels()))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
             } else {
-                emit(Resource.error(null, callResults.message()))
+                emit(ApiResponse.Error(callResults.message()))
             }
         } catch (exc: Exception) {
-            emit(Resource.error(null, exc.message ?: "Error occurred!"))
+            emit(ApiResponse.Error(exc.message ?: "Error occurred!"))
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getTVShowById(id: Int) = flow {
-        emit(Resource.loading(null))
-
+    suspend fun getTVShowById(id: Int) = flow {
         try {
             val callResults = api.getTvShowDetailOf(id)
             val data = callResults.body()
 
-            if (callResults.isSuccessful && data != null) {
-                emit(Resource.success(data.asModels()))
+            if (callResults.isSuccessful && callResults.code() == 200) {
+                if (data != null) {
+                    emit(ApiResponse.Success(data.asModels()))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
             } else {
-                emit(Resource.error(null, callResults.message()))
+                emit(ApiResponse.Error(callResults.message()))
             }
         } catch (exc: Exception) {
-            emit(Resource.error(null, exc.message ?: "Error occurred!"))
+            emit(ApiResponse.Error(exc.message ?: "Error occurred!"))
         }
     }.flowOn(Dispatchers.IO)
 
@@ -132,8 +141,6 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     fun searchTVShows(query: String) = flow {
-        emit(Resource.loading(null))
-
         try {
             val callResults = api.searchTVShows(query)
             val data = callResults.body()

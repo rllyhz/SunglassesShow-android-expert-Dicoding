@@ -8,8 +8,12 @@ import id.rllyhz.core.data.remote.RemoteDataSource
 import id.rllyhz.core.domain.model.Movie
 import id.rllyhz.core.domain.model.TVShow
 import id.rllyhz.core.domain.repository.ISunGlassesShowRepository
+import id.rllyhz.core.utils.ext.asEntity
+import id.rllyhz.core.utils.ext.asModel
+import id.rllyhz.core.vo.ApiResponse
 import id.rllyhz.core.vo.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SunGlassesShowRepository @Inject constructor(
@@ -17,16 +21,64 @@ class SunGlassesShowRepository @Inject constructor(
     private val local: LocalDataSource
 ) : ISunGlassesShowRepository {
     override fun getMovies(): Flow<Resource<List<Movie>>> =
-        remote.getAllMovies()
+        object : NetWorkBoundResource<List<Movie>, List<Movie>>() {
+            override fun loadFromDB(): Flow<List<Movie>> =
+                local.getMovies().map { it.asModel() }
+
+            override fun shouldFetch(data: List<Movie>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<ApiResponse<List<Movie>>> =
+                remote.getAllMovies()
+
+            override suspend fun saveCallResult(data: List<Movie>) =
+                local.addMovies(data.asEntity())
+        }.asFlow()
 
     override fun getTVShows(): Flow<Resource<List<TVShow>>> =
-        remote.getAllTVShows()
+        object : NetWorkBoundResource<List<TVShow>, List<TVShow>>() {
+            override fun loadFromDB(): Flow<List<TVShow>> =
+                local.getTVShows().map { it.asModel() }
+
+            override fun shouldFetch(data: List<TVShow>?): Boolean =
+                data == null || data.isEmpty()
+
+            override suspend fun createCall(): Flow<ApiResponse<List<TVShow>>> =
+                remote.getAllTVShows()
+
+            override suspend fun saveCallResult(data: List<TVShow>) =
+                local.addTVShows(data.asEntity())
+        }.asFlow()
 
     override fun getMovieById(id: Int): Flow<Resource<Movie>> =
-        remote.getMovieById(id)
+        object : NetWorkBoundResource<Movie, Movie>() {
+            override fun loadFromDB(): Flow<Movie> =
+                local.getMovieById(id).map { it.asModel() }
+
+            override fun shouldFetch(data: Movie?): Boolean =
+                data == null
+
+            override suspend fun createCall(): Flow<ApiResponse<Movie>> =
+                remote.getMovieById(id)
+
+            override suspend fun saveCallResult(data: Movie) =
+                local.addMovie(data.asEntity())
+        }.asFlow()
 
     override fun getTVShowById(id: Int): Flow<Resource<TVShow>> =
-        remote.getTVShowById(id)
+        object : NetWorkBoundResource<TVShow, TVShow>() {
+            override fun loadFromDB(): Flow<TVShow> =
+                local.getTVShowById(id).map { it.asModel() }
+
+            override fun shouldFetch(data: TVShow?): Boolean =
+                data == null
+
+            override suspend fun createCall(): Flow<ApiResponse<TVShow>> =
+                remote.getTVShowById(id)
+
+            override suspend fun saveCallResult(data: TVShow) =
+                local.addTVShow(data.asEntity())
+        }.asFlow()
 
     override fun getSimilarMoviesOf(id: Int): Flow<Resource<List<Movie>>> =
         remote.getSimilarMoviesOfMovie(id)

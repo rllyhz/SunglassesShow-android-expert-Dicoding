@@ -68,6 +68,7 @@ interface ApiEndpoint {
 
     companion object {
         private const val API_VERSION = 3
+        const val hostname = "themoviedb.org"
         const val BASE_URL = "https://api.themoviedb.org/"
         const val IMAGE_URL = "https://image.tmdb.org/t/p/original/"
         const val API_KEY = BuildConfig.APP_API_KEY

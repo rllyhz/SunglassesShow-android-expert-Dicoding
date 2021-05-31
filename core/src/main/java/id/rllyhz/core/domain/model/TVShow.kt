@@ -17,8 +17,8 @@ data class TVShow(
     val durationInMinutes: Int?,
     val rate: Float,
     val releasedAt: String,
-    val language: String,
-    val synopsis: String,
+    val language: String?,
+    val synopsis: String?,
     val status: String?
 ) : Parcelable {
 

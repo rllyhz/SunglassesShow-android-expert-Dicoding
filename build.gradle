@@ -26,6 +26,9 @@ buildscript {
         viewPager2Version = '1.1.0-alpha01'
         shimmerVersion = '0.5.0'
 
+        sqlChiperVersion = '4.4.0'
+        sqliteKtxVersion = '2.1.0'
+
         junitVersion = '4.13.2'
         junitExtVersion = '1.1.2'
         espressoVersion = '3.3.0'

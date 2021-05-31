@@ -43,6 +43,6 @@ apply from: '../shared_dependencies.gradle'
 
 dependencies {
 
-//    implementation "net.zetetic:android-database-sqlcipher:$sqlChiperVersion"
-//    implementation "androidx.sqlite:sqlite-ktx:$sqliteKtxVersion"
+    implementation "net.zetetic:android-database-sqlcipher:$sqlChiperVersion"
+    implementation "androidx.sqlite:sqlite-ktx:$sqliteKtxVersion"
 }
