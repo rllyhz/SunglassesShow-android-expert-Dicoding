@@ -44,6 +44,26 @@ object DataHelper {
             0, 0f, "", "", "", ""
         )
 
+    fun getAllFavMovies() =
+        listOf(
+            FavMovie(
+                1, "", "", "movie1", 0, 0f
+            ),
+            FavMovie(
+                2, "", "", "movie2", 0, 0f
+            )
+        )
+
+    fun getAllFavTVShows() =
+        listOf(
+            FavTVShow(
+                1, "", "", "tvShow1", 0, 0f
+            ),
+            FavTVShow(
+                2, "", "", "tvShow2", 0, 0f
+            )
+        )
+
     fun getFavMovie(): FavMovie =
         FavMovie(
             1, "", "", "movie1", 0, 0f
@@ -51,7 +71,7 @@ object DataHelper {
 
     fun getFavTVShow(): FavTVShow =
         FavTVShow(
-            1, "", "", "movie1", 0, 0f
+            1, "", "", "tvShow1", 0, 0f
         )
 
     fun getMoviesLiveData(): MutableLiveData<Resource<List<Movie>>> {
