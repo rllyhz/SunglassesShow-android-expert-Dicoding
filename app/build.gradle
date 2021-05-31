@@ -23,7 +23,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,6 +47,10 @@ apply from: '../shared_dependencies.gradle'
 
 dependencies {
     implementation project(":core")
+
+    // leak canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+
 //    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 //    implementation "androidx.appcompat:appcompat:$appcompatVersion"

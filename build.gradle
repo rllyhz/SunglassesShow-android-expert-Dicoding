@@ -26,13 +26,16 @@ buildscript {
         viewPager2Version = '1.1.0-alpha01'
         shimmerVersion = '0.5.0'
 
-        sqlChiperVersion = '4.4.0'
+        sqlChiperVersion = '4.4.3'
         sqliteKtxVersion = '2.1.0'
+        leakCanaryVersion = '2.7'
 
         junitVersion = '4.13.2'
         junitExtVersion = '1.1.2'
         espressoVersion = '3.3.0'
-        kotlin_version = '1.4.32'
+        mockitoVersion = '3.9.0'
+        mockitoKotlinVersion = '2.2.0'
+        coreTestingVersion = '2.1.0'
     }
 
     repositories {
