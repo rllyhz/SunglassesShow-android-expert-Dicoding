@@ -23,6 +23,7 @@ import javax.inject.Inject
 class TVShowContentFragment :
     ContentFragment<TVShow, SimilarTVShowContentsAdapter.TVShowContentViewHolder>(),
     ContentItemCallback<TVShow> {
+    private var mAdapter: SimilarTVShowContentsAdapter? = null
 
     @Inject
     lateinit var assistedFactory: TVShowDetailViewModelAssistedFactory
@@ -33,10 +34,11 @@ class TVShowContentFragment :
         TVShowDetailViewModel.Factory(assistedFactory, id)
     }
 
-    override fun initAdapter(): ListAdapter<TVShow, SimilarTVShowContentsAdapter.TVShowContentViewHolder> =
-        SimilarTVShowContentsAdapter().apply {
-            setItemCallback(this@TVShowContentFragment)
-        }
+    override fun initAdapter(): ListAdapter<TVShow, SimilarTVShowContentsAdapter.TVShowContentViewHolder>? {
+        mAdapter = SimilarTVShowContentsAdapter()
+        mAdapter?.setItemCallback(this)
+        return mAdapter
+    }
 
     override fun initUI() {
         val currentTVShow = arguments?.getParcelable<TVShow>(PARAMS_TV_SHOWS)
@@ -136,6 +138,12 @@ class TVShowContentFragment :
 
             requireActivity().startActivity(this)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mAdapter?.setItemCallback(null)
+        mAdapter = null
     }
 
     companion object {

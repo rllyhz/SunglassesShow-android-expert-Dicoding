@@ -22,6 +22,7 @@ import javax.inject.Inject
 class MovieContentFragment :
     ContentFragment<Movie, SimilarMovieContentsAdapter.SimilarContentViewHolder>(),
     ContentItemCallback<Movie> {
+    private var mAdapter: SimilarMovieContentsAdapter? = null
 
     @Inject
     lateinit var assistedFactory: MovieDetailViewModelAssistedFactory
@@ -32,10 +33,11 @@ class MovieContentFragment :
         MovieDetailViewModel.Factory(assistedFactory, id)
     }
 
-    override fun initAdapter(): ListAdapter<Movie, SimilarMovieContentsAdapter.SimilarContentViewHolder> =
-        SimilarMovieContentsAdapter().apply {
-            setItemCallback(this@MovieContentFragment)
-        }
+    override fun initAdapter(): ListAdapter<Movie, SimilarMovieContentsAdapter.SimilarContentViewHolder>? {
+        mAdapter = SimilarMovieContentsAdapter()
+        mAdapter?.setItemCallback(this)
+        return mAdapter
+    }
 
     override fun initUI() {
         val currentMovie = arguments?.getParcelable<Movie>(PARAMS_MOVIES)
@@ -135,6 +137,12 @@ class MovieContentFragment :
 
             requireActivity().startActivity(this)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mAdapter?.setItemCallback(null)
+        mAdapter = null
     }
 
     companion object {

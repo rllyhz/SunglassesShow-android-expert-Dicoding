@@ -67,7 +67,7 @@ class SimilarTVShowContentsAdapter :
 
     private var tvShowItemCallback: ContentItemCallback<TVShow>? = null
 
-    fun setItemCallback(callback: ContentItemCallback<TVShow>) {
+    fun setItemCallback(callback: ContentItemCallback<TVShow>?) {
         tvShowItemCallback = callback
     }
 }

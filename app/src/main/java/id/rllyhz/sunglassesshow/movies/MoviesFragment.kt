@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.rllyhz.core.domain.model.Movie
@@ -25,6 +24,8 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!! // only valid between onCreateView and onDestroyView
 
+    private var mView: View? = null // avoiding memory leaks
+
     private var moviesAdapter: MoviesAdapter? = null
     private val viewModel: MainViewModel by viewModels()
 
@@ -32,9 +33,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
-        return binding.root
+        mView = binding.root
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -185,7 +187,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemCallback {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.rvMovies.adapter = null
         _binding = null // avoiding memory leaks
+        moviesAdapter?.setItemCallback(null)
         moviesAdapter = null
+        mView = null
     }
 }

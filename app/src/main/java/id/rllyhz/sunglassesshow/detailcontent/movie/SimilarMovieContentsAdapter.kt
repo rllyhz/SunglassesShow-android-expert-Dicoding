@@ -69,7 +69,7 @@ class SimilarMovieContentsAdapter :
 
     private var movieItemCallback: ContentItemCallback<Movie>? = null
 
-    fun setItemCallback(callback: ContentItemCallback<Movie>) {
+    fun setItemCallback(callback: ContentItemCallback<Movie>?) {
         movieItemCallback = callback
     }
 }

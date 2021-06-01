@@ -74,7 +74,7 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MoviesViewHolder>(MovieCo
 
     private var movieItemCallback: MovieItemCallback? = null
 
-    fun setItemCallback(callback: MovieItemCallback) {
+    fun setItemCallback(callback: MovieItemCallback?) {
         movieItemCallback = callback
     }
 }

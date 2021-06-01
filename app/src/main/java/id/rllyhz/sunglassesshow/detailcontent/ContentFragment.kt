@@ -15,6 +15,8 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
     private var _binding: FragmentContentBinding? = null
     protected val binding get() = _binding!! // only valid between onCreateView and onDestroyView.
 
+    private var mView: View? = null // avoiding memory leaks
+
     private var _adapter: ListAdapter<T, VH>? = null
     protected var isLoading: Boolean = false
 
@@ -22,9 +24,10 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentContentBinding.inflate(inflater, container, false)
-        return binding.root
+        mView = binding.root
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +37,7 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
         observeData()
     }
 
-    protected abstract fun initAdapter(): ListAdapter<T, VH>
+    protected abstract fun initAdapter(): ListAdapter<T, VH>?
 
     private fun setupInitialUI() {
         _adapter = initAdapter()
@@ -151,8 +154,10 @@ abstract class ContentFragment<T, VH : RecyclerView.ViewHolder> : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.rvSimilarContentDetail.adapter = null
         _binding = null // avoiding memory leaks
         _adapter = null
+        mView = null
     }
 
     companion object {

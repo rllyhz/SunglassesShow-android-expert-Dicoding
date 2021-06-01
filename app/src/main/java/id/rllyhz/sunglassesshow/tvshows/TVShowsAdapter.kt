@@ -74,7 +74,7 @@ class TVShowsAdapter : ListAdapter<TVShow, TVShowsAdapter.TVShowsViewHolder>(TVS
 
     private var tvShowItemCallback: TVShowItemCallback? = null
 
-    fun setItemCallback(callback: TVShowItemCallback) {
+    fun setItemCallback(callback: TVShowItemCallback?) {
         tvShowItemCallback = callback
     }
 }

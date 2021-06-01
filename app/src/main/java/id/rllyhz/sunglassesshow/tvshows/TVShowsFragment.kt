@@ -24,6 +24,8 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding!!
 
+    private var mView: View? = null // avoiding memory leaks
+
     private var tvShowsAdapter: TVShowsAdapter? = null
     private val viewModel: MainViewModel by viewModels()
 
@@ -31,9 +33,10 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentTvShowsBinding.inflate(inflater, container, false)
-        return binding.root
+        mView = binding.root
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -184,7 +187,10 @@ class TVShowsFragment : Fragment(), TVShowsAdapter.TVShowItemCallback {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.rvTvShows.adapter = null
         _binding = null // avoiding memory leaks
+        tvShowsAdapter?.setItemCallback(null)
         tvShowsAdapter = null
+        mView = null
     }
 }
