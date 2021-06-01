@@ -36,7 +36,6 @@ buildscript {
         mockitoVersion = '3.9.0'
         mockitoKotlinVersion = '2.2.0'
         coreTestingVersion = '2.1.0'
-        espressoIdlingResource = '3.0.2'
     }
 
     repositories {
