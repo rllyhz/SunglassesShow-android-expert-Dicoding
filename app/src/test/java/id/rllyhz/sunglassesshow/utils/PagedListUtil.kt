@@ -1,7 +1,6 @@
 package id.rllyhz.sunglassesshow.utils
 
 import androidx.paging.PagedList
-import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
